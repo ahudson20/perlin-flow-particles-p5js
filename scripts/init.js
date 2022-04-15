@@ -4,7 +4,7 @@ const noiseScale = 0.01;
 
 // meh it works but kinda not smooth.
 function windowResized() {
-    resizeCanvas(window.outerWidth, window.outerHeight);
+    resizeCanvas(window.innerWidth, window.innerHeight);
 }
 
 function setup() {
