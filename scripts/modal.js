@@ -1,8 +1,14 @@
 window.addEventListener('load', modalLoad);
 
 function modalLoad() {
+    const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
+
     // Get the modal
     var modal = document.getElementById("modal-id");
+
+    if (isMobileDevice) {
+        modal.style.display = "none";
+    }
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
