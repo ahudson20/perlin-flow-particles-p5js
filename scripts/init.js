@@ -2,6 +2,36 @@ let particles = [];
 const numParticles = 100;
 const noiseScale = 0.01;
 
+//var onlongtouch;
+var timer;
+var touchduration = 1000; //length of time we want the user to touch before we do something
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); // check if browser is mobile
+
+function touchStarted() {
+    if (isMobile) {
+        console.log("isMobile, touchStarted, generateNewParticle, start timer for alter noise seed");
+        generateNewParticle();
+        timer = setTimeout(onlongtouch, touchduration);
+    }
+}
+
+function touchEnded() {
+    //stops short touches from firing the event
+    if (isMobile) {
+        if (timer) {
+            clearTimeout(timer); // clearTimeout, not cleartimeout..
+        }
+    }
+}
+
+function onlongtouch() {
+    //    generateNewParticle();
+    if (isMobile) {
+        console.log("longtouch noiseseed");
+        noiseSeed(millis());
+    }
+}
+
 // meh it works but kinda not smooth.
 function windowResized() {
     resizeCanvas(window.innerWidth, window.innerHeight);
@@ -24,12 +54,15 @@ function checkOffScreen(v) {
 
 // when the mouse clicks on screen, randomly changes the seed value for the noise function.
 function mouseReleased() {
-    noiseSeed(millis());
+    if (!isMobile) {
+        console.log("!isMobile, noise seed");
+        noiseSeed(millis());
+    }
 }
 
 //when press enter key, generate new particle
 function keyPressed() {
-    if (key == ' '){
+    if (key == ' ') {
         generateNewParticle();
     }
 }
@@ -38,7 +71,6 @@ function keyPressed() {
 function generateNewParticle() {
     if (particles.length < 10000) { // limit the amout of particles to 10k, after that it starts to slow down.
         particles.push(createVector(mouseX, mouseY));
-
     }
 }
 
