@@ -2,16 +2,21 @@
 
 <head>
     <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
     <script src="./scripts/init.js"></script>
     <script src="./scripts/modal.js"></script>
+    <script src="./scripts/options-modal.js"></script>
+    <script src="./scripts/slider.js"></script>
 
     <!-- styles -->
     <link rel="stylesheet" href="./styles/global.css">
     <link rel="stylesheet" href="./styles/modal.css">
+    <link rel="stylesheet" href="./styles/slider.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!--
         Credit to Barney Codes
@@ -21,17 +26,48 @@
 </head>
 
 <body>
-    <main>
+    <main id="myContainer">
+        <!-- Options Button -->
+        <div class='buttonContainer'>
+            <!--            <button class="but" id="openOptionsButton">Settings</button>-->
+            <i class="fa-solid fa-ellipsis fa-2xl but" id="openOptionsButton"></i>
+        </div>
     </main>
 </body>
 
-<!-- The Modal -->
+<!-- Start Modal -->
 <div id="modal-id" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
         <p>SPACE ~ add particle</p>
         <p>MOUSE CLICK ~ alter noise</p>
+    </div>
+</div>
+
+<!-- Options Modal -->
+<div id="optionsModal" class="options-modal">
+    <!-- Options Modal content -->
+    <div class="options-modal-content">
+        <span class="options-close">&times;</span>
+        <label for="color">Colourful </label>
+        <input type="checkbox" name="color" id="myCheck">
+
+        <div class="slidecontainer">
+             <label for="opacity">Opacity </label>
+            <input name="opacity" type="range" min="1" max="100" value="15" id="slider-id">
+        </div>
+        
+        <div class="slidecontainer">
+             <label for="weight">Weight </label>
+            <input name="weight" type="range" min="1" max="10" value="1" id="weight-slider-id">
+        </div>
+        
+        <div class="slidecontainer">
+             <label for="seed">Seed </label>
+            <input name="seed" type="range" step="0.001" min="0.001" max="0.05" value="0.01" id="seed-slider-id">
+        </div>
+
     </div>
 </div>
 

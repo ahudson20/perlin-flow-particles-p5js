@@ -1,37 +1,41 @@
 let particles = [];
 let numParticles;
-const noiseScale = 0.01;
+let noiseScale = 0.01;
 const isMobileDevice = /Mobi/i.test(window.navigator.userAgent)
 
-// meh it works but kinda not smooth.
+let amt, startColor, newColor;
+
 function windowResized() {
     resizeCanvas(window.innerWidth, window.innerHeight);
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.parent('myContainer');
+    canvas.mousePressed(doStuff);
+    
     if (isMobileDevice) {
-        numParticles = 2000;
+        numParticles = 2500;
     } else {
-        numParticles = 250;
+        numParticles = 1500;
     }
     for (let i = 0; i < numParticles; i++) {
         particles.push(createVector(random(width), random(height)));
     }
-    stroke(255);
-    // For a cool effect try uncommenting this line
-    // And comment out the background() line in draw
-    //     stroke(255, 10);
+
+    startColor = color(255, 255, 255);
+    newColor = color(random(255), random(255), random(255));
+    amt = 0;
+}
+
+function doStuff() {
+    noiseSeed(millis());
 }
 
 function checkOffScreen(v) {
     return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
 }
 
-// when the mouse clicks on screen, randomly changes the seed value for the noise function.
-function mouseReleased() {
-    noiseSeed(millis());
-}
 
 //when press enter key, generate new particle
 function keyPressed() {
@@ -47,8 +51,31 @@ function generateNewParticle() {
     }
 }
 
+function smoothstep(edge0, edge1, x) {
+    x = constrain((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+    return x * x * (3 - 2 * x);
+}
+
 function draw() {
-    background(0, 10); //adds alpha, can see what is being drawn behind the border.
+    //adds alpha, can see what is being drawn behind the border. sliderValue comes from slider.js, deafault 10
+    background(0, sliderValue/1); // I have no idea, but dividing by 1 makes it work, without it its broken??
+    strokeWeight(weightValue);
+    noiseScale = seed;
+    
+    if (document.getElementById('myCheck').checked) {
+        stroke(lerpColor(startColor, newColor, smoothstep(0.3, 0.7, amt)));
+        amt += 0.01;
+        if (amt >= 1) {
+            amt = 0.0;
+            startColor = newColor;
+            newColor = color(random(255), random(255), random(255));
+        }
+    } else {
+//        stroke('rgb(0,255,0)'); //green
+//        stroke('rgba(0, 255, 0, 1.0)');// green, opactity value
+        stroke('rgb(255,255,255)'); //white
+
+    }
 
     for (let i = 0; i < particles.length; i++) {
         let particle = particles[i];
