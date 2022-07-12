@@ -12,6 +12,11 @@ Mobile:
 - tap to add another particle
 - longpress to alter the noise seed
 
-![alt text](https://github.com/ahudson20/perlin-flow-particles-p5js/blob/main/pnff.png "perlin flow image")
+https://www.perlinflow.xyz/
+https://www.perlinflow.xyz/
+https://www.perlinflow.xyz/
+https://www.perlinflow.xyz/
+https://www.perlinflow.xyz/
+https://www.perlinflow.xyz/
 
 
