@@ -12,6 +12,7 @@ Mobile:
 - tap to add another particle
 - longpress to alter the noise seed
 
+# Test it out:
 https://www.perlinflow.xyz/ \
 https://www.perlinflow.xyz/ \
 https://www.perlinflow.xyz/ \
